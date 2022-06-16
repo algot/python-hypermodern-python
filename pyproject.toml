@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "python_hypermodern_python"
+name = "hypermodern_python"
 version = "0.1.0"
 description = "The hypermodern Python project"
 authors = ["algot <algot@ua.fm>"]
@@ -7,9 +7,14 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
+click = "^8.1.3"
 
 [tool.poetry.dev-dependencies]
+autopep8 = "^1.6.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+hypermodern-python = "src.hypermodern_python.console:main"
