@@ -1,0 +1,22 @@
+[MASTER]
+init-hook='import sys; sys.path.append("")' # fix pylint import issue
+
+disable=
+    C0114, # missing-module-docstring
+    C0115, # missing-class-docstring
+    C0116, # missing-function-docstring
+    C0103, # name convention
+    R0903, # too few public methods
+    R0904, # too many public methods
+    R0801, # similar lines in %s files
+    R0902, # Too many instance attributes
+    R0914, # Too many local variables
+    R0913, # Too many arguments
+    W0511, # TODO
+
+
+
+
+[FORMAT]
+max-line-length=130
+max-args = 6
