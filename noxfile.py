@@ -2,10 +2,10 @@ import tempfile
 
 import nox
 
-nox.options.sessions = "lint", "safety", "tests"
+nox.options.sessions = "lint", "mypy", "tests"
 
 locations = "src", "tests", "noxfile.py"
-versions = ["3.8", "3.9", "3.10"]
+versions = ["3.9", "3.10"]
 
 
 @nox.session(python=versions)
@@ -51,6 +51,13 @@ def safety(session):
         )
         install_with_constraints(session, "safety")
         session.run("safety", "check", f"--file={requirements.name}", "--full-report")
+
+
+@nox.session(python=versions)
+def mypy(session):
+    args = session.posargs or ["--ignore-missing-imports", *locations]
+    install_with_constraints(session, "mypy")
+    session.run("mypy", *args)
 
 
 def install_with_constraints(session, *args, **kwargs):
