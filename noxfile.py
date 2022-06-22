@@ -2,7 +2,7 @@ import tempfile
 
 import nox
 
-nox.options.sessions = "lint", "mypy", "tests"
+nox.options.sessions = "lint", "mypy", "pytype", "tests"
 
 locations = "src", "tests", "noxfile.py"
 versions = ["3.9", "3.10"]
@@ -58,6 +58,14 @@ def mypy(session):
     args = session.posargs or ["--ignore-missing-imports", *locations]
     install_with_constraints(session, "mypy")
     session.run("mypy", *args)
+
+
+@nox.session(python=versions)
+def pytype(session):
+    """Run the static type checker."""
+    args = session.posargs or ["--disable=import-error", *locations]
+    install_with_constraints(session, "pytype")
+    session.run("pytype", *args)
 
 
 def install_with_constraints(session, *args, **kwargs):
